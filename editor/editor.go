@@ -392,6 +392,24 @@ func isFileExist(filename string) bool {
 	return err == nil
 }
 
+func makeWrapLabelText(s string, w int, f *gui.QFontMetricsF) string {
+	wrapText := []rune("")
+	i := 0
+	for _, c := range s {
+		wrapText = append(wrapText, c)
+		textWidth := int(f.HorizontalAdvance(string(wrapText[i:]), -1))
+		if textWidth >= w {
+			wrapText = append(wrapText, '<')
+			wrapText = append(wrapText, 'b')
+			wrapText = append(wrapText, 'r')
+			wrapText = append(wrapText, '>')
+			i = len(wrapText)
+		}
+	}
+
+	return string(wrapText)
+}
+
 func (e *Editor) copyClipBoard() {
 	go func() {
 		var yankedText string

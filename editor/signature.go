@@ -27,6 +27,13 @@ type Signature struct {
 func initSignature() *Signature {
 	widget := widgets.NewQWidget(nil, 0)
 	widget.SetContentsMargins(8, 8, 8, 8)
+
+	shadow := widgets.NewQGraphicsDropShadowEffect(nil)
+	shadow.SetBlurRadius(55)
+	shadow.SetColor(gui.NewQColor3(0, 0, 0, 200))
+	shadow.SetOffset3(-2, 4)
+
+	widget.SetGraphicsEffect(shadow)
 	layout := widgets.NewQVBoxLayout()
 	layout.SetContentsMargins(0, 0, 0, 0)
 
